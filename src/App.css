@@ -1,0 +1,16 @@
+body.dark{
+  background-color: rgba(43, 41, 41, 0.944);
+  color: #fff;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #aeaeae;
+  border-radius: 30px;
+}
