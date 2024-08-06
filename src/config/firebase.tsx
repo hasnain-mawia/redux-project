@@ -57,13 +57,12 @@ const ProductUpload = async(obj:any) =>{
   return addDoc(collection(db,"products"),{title, quantity, price, category, description, image: URL});
 }
 
-const Getdata = async(nodename:any) =>{
+const Getdata = async() =>{
   const docRef = collection(db,"products")
   const docData = await getDocs(docRef);
   const data = docData.docs.map(doc=>({
     id:doc.id, ...doc.data()
   }))
-  console.log(data)
   return data
 }
 

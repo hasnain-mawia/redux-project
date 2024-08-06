@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Logout } from '../config/firebase'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {auth, onAuthStateChanged } from "../config/firebase";
 import { LuLogOut } from 'react-icons/lu';
 import { FaMoon, FaSun } from "react-icons/fa6";
@@ -37,6 +37,7 @@ function Header() {
         </div>
         {/* <input type="text" className='p-3 bg-slate-400' onChange={(e)=>setSearchItem(e.target.value)} /> */}
         <div className="flex items-center gap-2">
+        <Link className='text-white font-medium' to={'/dashboard'}>All Products</Link>
         <div className='flex justify-end items-center gap-2 bg-[#ffffff] dark:bg-[#2F9EED] pl-4 rounded-[30px]'>
         <p className='font-semibold'>{user?.email}</p>
         <button onClick={logoutUser} title='Logout' className='bg-[red] text-white rounded-[30px] p-3'><LuLogOut className='text-[22px]' /></button>

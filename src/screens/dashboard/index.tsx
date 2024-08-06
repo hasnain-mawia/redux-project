@@ -6,19 +6,14 @@ import { Getdata} from '../../config/firebase';
 
 function Index() {
   const [products, setProducts] = useState<any>([]);
+
   const getfirebasedata = async() =>{
-    await Getdata('products').then((res)=>{
-     setProducts([...res])
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+   const product = await Getdata()
+    setProducts(product)
   }
   useEffect(() => {
     getfirebasedata()
-  },[products])
-
-   console.log(products) 
+  },[])
   // const filterData = products.filter((product:any) => {
   //   product.title.toLowerCase().includes(searchItem)
   // })

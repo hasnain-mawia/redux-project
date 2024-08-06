@@ -28,8 +28,8 @@ function Login() {
         }
         setErrors(validationErrors)
         if(Object.keys(validationErrors).length === 0){
-        await LoginSetup(values.email, values.password)
-        try{
+        await LoginSetup(values.email, values.password).then(()=>{
+
           toast.success(`Login Successfully`, {
             position: "top-right",
             autoClose: 2000,
@@ -41,9 +41,8 @@ function Login() {
           });
           localStorage.setItem('isLogin', "true"); 
           navigate('/dashboard')
-        }catch(err)
-        {
-          toast.error(`${err}`, {
+        }).catch((error)=>{
+          toast.error(`Please Enter valid Crediantials`, {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: true,
@@ -52,7 +51,7 @@ function Login() {
             draggable: true,
             theme: "dark",
             });
-        }
+        })
        
         setvalues({
             email:"",

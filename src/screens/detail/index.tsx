@@ -5,6 +5,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { useDispatch } from 'react-redux'
 import { addtocart } from '../../store/cartSlice'
+import { toast } from 'react-toastify'
 
 function Index(){
   const params = useParams()
@@ -13,11 +14,24 @@ function Index(){
    const [isLoading , setisLoading] = useState(false);
    const [detailview, setDetailview] = useState<any>({});
 
+   const detailProduct = (detailview:any) =>{
+    dispatch(addtocart(detailview))
+    toast.success(`${detailview.title} Added`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+    });
+   } 
    const getDetailProduct = async()=>{
     setisLoading(true)
    const docRef = doc(db,"products", `${params.id}`);
    const docSnap = await getDoc(docRef);
-     setDetailview(docSnap.data())
+   const fValue = {id : docSnap.id, ...docSnap.data()}
+     setDetailview(fValue)
      setisLoading(false)
    }
    useEffect(()=>{
@@ -38,7 +52,7 @@ function Index(){
                 <p className='my-5'>{description}</p>
                 <p className='text-[red] font-bold'>Category: {category}</p>
                 <p className='text-[green] dark:text-[white] font-bold text-[22px]'>${price}</p>
-                <button onClick={()=>dispatch(addtocart(detailview))} className='bg-[#0088ff] px-4 py-2 rounded-[30px] text-white mt-5'>Add to Cart</button>
+                <button onClick={()=>detailProduct(detailview)} className='bg-[#0088ff] px-4 py-2 rounded-[30px] text-white mt-5'>Add to Cart</button>
             </div>
         </div>
   
