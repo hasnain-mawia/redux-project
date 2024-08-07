@@ -12,8 +12,8 @@ import { toast } from 'react-toastify';
 
 
 function SlideCart() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cart = useSelector((state:any) => state.cart); 
   const [showCart, setShowCart] = useState(false);
   const totalQty = cart.reduce((totalQty:any, item:any)=>totalQty + item.quantity,0);
@@ -35,7 +35,7 @@ function SlideCart() {
 
   useEffect(()=>{
     const menu = document.querySelector('#menuref')
-    document.addEventListener('mousedown',(e:any)=>{
+    document.addEventListener('mousemove',(e:any)=>{
         if(!menu?.contains(e.target)){
         setShowCart(false) 
         }
@@ -58,12 +58,12 @@ function SlideCart() {
             <div key={i} className='relative w-full gap-2 flex items-center py-2 border-[1px] shadow-lg border-[#e7e7e7] rounded-lg p-3'>
               <img src={image} alt={title} className='w-[70px] h-[70px] rounded-[5px]' />
               <div>
-                <h3 className='text-[16px]'>{title}</h3>
+                <h3 className='text-[16px] dark:text-[black]'>{title}</h3>
                 <div className='flex items-center gap-5'>
-                <p className='text-[red] text-[17px]'>${price}</p>
+                <p className='text-[red] text-[17px] dark:text-[black]'>${price}</p>
                 <div className='flex items-center justify-center gap-3 border-[1px] shadow-lg border-[#e7e7e7] rounded-lg px-2 py-1 absolute bottom-0 right-0'>
                 <button> {item.quantity <= 1 ? <MdDelete onClick={()=>removeCart(item)} className='text-[red] text-[22px]'/>:<FaMinusCircle onClick={()=>{dispatch(DecrementQty(item))}} className='text-[red]'/>}</button>
-                <p>{item.quantity}</p> 
+                <p className='dark:text-[black]'>{item.quantity}</p> 
                 <button onClick={()=> dispatch(IncrementQty(item))}><FaPlusCircle className='text-[green]'/></button>
               </div>
                 </div>
@@ -95,7 +95,7 @@ function SlideCart() {
           cart.length > 0 && 
       <span className='absolute right-0 top-0 animate-bounce bg-[#fd0707] text-white p-[10px] w-[10px] h-[10px] rounded-[30px] flex items-center justify-center'>{cart.length}</span>
       }
-    <MdShoppingCart onClick={()=>toggleCart()} className='text-[30px] cursor-pointer'/>
+    <MdShoppingCart onClick={()=>toggleCart()} className='text-[30px] cursor-pointer dark:text-[black]'/>
     </div> 
     </>
   ):null

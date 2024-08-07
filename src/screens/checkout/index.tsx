@@ -12,7 +12,9 @@ function Upload() {
   const cart = useSelector((state: any) => state.cart);
   const totalQty = cart.reduce((totalQty: any, item: any) => totalQty + item.quantity, 0);
   const TotalPrice = cart.reduce((total: any, item: any) => total + item.quantity * item.price, 0);
-  const Total = cart.reduce(() => TotalPrice - 10.99 + 25, 0);
+  const SaleDiscount = 10.99;
+  const ShippingRate = 25;
+  const Total = cart.reduce(() => TotalPrice - SaleDiscount + ShippingRate, 0);
   const dispatch = useDispatch();
 
 
@@ -74,20 +76,6 @@ function Upload() {
 
 
   }
-
-  const removeCart = (item: any) => {
-    dispatch(removeFromCart(item))
-    toast.error(`${item.title} removed`, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    });
-  }
-
 
   return (
     <>
@@ -160,13 +148,13 @@ function Upload() {
           <div className='flex flex-col gap-5 bg-[#ededed] dark:bg-[#c9c8c8] p-3 rounded-xl'>
             <h2 className='text-[27px] font-semibold mb-2 dark:text-[black] border-b-2 border-[gray]'>Order Summary</h2>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold'>Total Items :</h2> <h2>{totalQty}</h2>
+              <h2 className='font-semibold dark:text-[black]'>Total Items :</h2> <h2 className='dark:text-[black]'>{totalQty}</h2>
             </div>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold'>Sale Discount :</h2> <h2 className='text-[red]'>-$10.55</h2>
+              <h2 className='font-semibold dark:text-[black]'>Sale Discount :</h2> <h2 className='text-[red]'>-${SaleDiscount}</h2>
             </div>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold'>Shipping Detail :</h2> <h2 className='text-[green]'>$25</h2>
+              <h2 className='font-semibold dark:text-[black]'>Shipping Detail :</h2> <h2 className='text-[green]'>${ShippingRate}</h2>
             </div>
             <h2 className='text-[23px] font-semibold dark:text-[black] border-t-2 border-[gray]'>Total Amount : $ {Math.round(Total)}</h2>
             <div>
@@ -174,8 +162,7 @@ function Upload() {
           </div>
           {cart.map((item: any) => {
             return (
-              <div className='relative flex items-center gap-5 border-[1px] border-[#bdbdbd] rounded-xl shadow-lg mt-5'>
-                <ImCross title='Delete' onClick={() => removeCart(item)} className='text-[red] top-3 right-3 absolute cursor-pointer' />
+              <div className='flex items-center gap-5 border-[1px] border-[#bdbdbd] rounded-xl shadow-lg mt-5'>
                 <img src={item.image} alt={item.title} className='w-[70px] h-[70px] rounded-[5px]' />
                 <div className='flex flex-col p-2'>
                   <h3 className='text-[16px] font-bold'>{item.title}</h3>

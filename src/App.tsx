@@ -7,13 +7,13 @@ import SlideCart from './components/SlideCart';
 import { useState } from 'react';
 
 function App() {
-  const isLogin = localStorage.getItem('isLogin');
+  // const isLogin = localStorage.getItem('isLogin');
   return (
     <>
     <Header />
     <Outlet/>
     <ToastContainer/>
-    {isLogin ? <SlideCart/> : null}
+    <SlideCart/>
     </>
   );
 }

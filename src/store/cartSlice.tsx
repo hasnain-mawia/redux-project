@@ -24,7 +24,6 @@ export const cartSlice = createSlice({
     DecrementQty:(state:any, data:any) => {
       state.cart = state.cart.map((item:any) => item.id === data.payload.id ? {...item,quantity : item.quantity - 1} : item);
     },
-  
   },
 })
 
