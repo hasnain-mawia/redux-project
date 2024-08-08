@@ -6,16 +6,22 @@ import { db } from '../../config/firebase'
 import { useDispatch } from 'react-redux'
 import { addtocart } from '../../store/cartSlice'
 import { toast } from 'react-toastify'
+import SpinnerButton from '../../components/SpinnerButton'
 
 function Index(){
   const params = useParams()
   const dispatch = useDispatch()
    const navigate = useNavigate()
    const [isLoading , setisLoading] = useState(false);
+   const [spinBtn, setSpinBtn] = useState(false)
    const [detailview, setDetailview] = useState<any>({});
 
-   const detailProduct = (detailview:any) =>{
-    dispatch(addtocart(detailview))
+   const SpinnerBtn = (detailview:any) =>{
+    setSpinBtn(true)
+    setTimeout(()=>{
+      dispatch(addtocart(detailview))
+      setSpinBtn(false)
+      },500)
     toast.success(`${detailview.title} Added`, {
       position: "top-right",
       autoClose: 2000,
@@ -37,6 +43,7 @@ function Index(){
    useEffect(()=>{
     getDetailProduct()
   },[])
+
   const {title,image,description,price,category} = detailview;
   
   return isLoading ? <CLoader/> : (
@@ -52,7 +59,7 @@ function Index(){
                 <p className='my-5'>{description}</p>
                 <p className='text-[red] font-bold'>Category: {category}</p>
                 <p className='text-[green] dark:text-[white] font-bold text-[22px]'>${price}</p>
-                <button onClick={()=>detailProduct(detailview)} className='bg-[#0088ff] px-4 py-2 rounded-[30px] text-white mt-5'>Add to Cart</button>
+                <SpinnerButton Loading={spinBtn} onClick={()=> SpinnerBtn(detailview)} className='bg-[#0088ff] px-4 py-2 rounded-[30px] text-white mt-5 flex items-center w-[120px] justify-center' title="Add to Cart" />
             </div>
         </div>
   

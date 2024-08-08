@@ -25,8 +25,11 @@ function Index() {
           products.map((product:any, i:number) => {
           return(
             <Link key={i} to={`/detail/${product.id}`} state={product}>
-            <div  className='shadow-2xl rounded-[10px] border-2 border-[#c9c9c9] flex flex-col items-center justify-center text-center'>
+            <div className='shadow-2xl rounded-[10px] border-2 border-[#c9c9c9] flex flex-col items-center justify-center text-center'> 
+          <div className='relative flex justify-center card-hover'>
           <img src={product.image} alt={product.title} className='overflow-hidden rounded-[10px]'/>
+          <button className='shop-btn bg-[#2F9EED] p-3 rounded-[30px] text-white absolute bottom-0 w-[120px] invisible'>Add to cart</button>
+          </div>
           <div className='py-3 px-2 w-full'>
             <h2 className='font-bold my-1'>{product.title.slice(0,25)}</h2>
             <p className='text-[green] dark:bg-[white] w-full rounded-[30px] text-[20px] font-semibold'>${product.price}</p>

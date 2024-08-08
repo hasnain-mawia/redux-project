@@ -2,8 +2,6 @@ body.dark{
   background-color: rgba(43, 41, 41, 0.944);
   color: #fff;
 }
-
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -13,4 +11,8 @@ body.dark{
 ::-webkit-scrollbar-thumb {
   background: #aeaeae;
   border-radius: 30px;
+}
+.card-hover:hover .shop-btn{
+  visibility:visible;
+  transition: all;
 }

@@ -32,21 +32,21 @@ function SlideCart() {
             theme: "dark",
         });
   }
-
   useEffect(()=>{
     const menu = document.querySelector('#menuref')
-    document.addEventListener('mousemove',(e:any)=>{
+    document.addEventListener('mousedown',(e:any)=>{
         if(!menu?.contains(e.target)){
-        setShowCart(false) 
-        }
+        setShowCart(false)}
     })
   },[])
 
   const isAuth = localStorage.getItem('isLogin'); 
   return isAuth ? (
     <>
+    { showCart ? <div className='bg-[#00000083] fixed top-0 h-screen w-full'></div> : null }
     <div id='menuref' className={`${showCart ? "translate-x-0" : "translate-x-full"} w-[90%] sm:w-[50%] md:w-[40%] lg:w-[40%] xl:w-[20%] transition-all duration-300 ease-in-out h-screen bg-[white] fixed shadow-2xl top-0 right-0 z-50`}>
-    <div className='w-[90%] text-[20px] p-5 flex justify-end items-center'><RxCross1 onClick={()=>toggleCart()} className='text-[30px] cursor-pointer' /></div>
+    <div className='w-[90%] text-[20px] p-5 flex items-center'><button className='bg-[#c6c6c6] rounded-[30px] p-2'>
+    <RxCross1 onClick={()=>toggleCart()} className='text-[30px] cursor-pointer'/></button></div>
     <div className='w-[90%] mx-auto flex flex-col items-center justify-center'>
     <div className='flex flex-col gap-3 w-full text-[20px] h-[80vh]'>
       { 
@@ -61,9 +61,9 @@ function SlideCart() {
                 <h3 className='text-[16px] dark:text-[black]'>{title}</h3>
                 <div className='flex items-center gap-5'>
                 <p className='text-[red] text-[17px] dark:text-[black]'>${price}</p>
-                <div className='flex items-center justify-center gap-3 border-[1px] shadow-lg border-[#e7e7e7] rounded-lg px-2 py-1 absolute bottom-0 right-0'>
+                <div className='flex items-center justify-center gap-1 absolute bottom-0 right-0 p-2'>
                 <button> {item.quantity <= 1 ? <MdDelete onClick={()=>removeCart(item)} className='text-[red] text-[22px]'/>:<FaMinusCircle onClick={()=>{dispatch(DecrementQty(item))}} className='text-[red]'/>}</button>
-                <p className='dark:text-[black]'>{item.quantity}</p> 
+                <p className='dark:text-[black] border-[1px] border-[#515050] rounded-md w-[40px] flex justify-center items-center'>{item.quantity}</p> 
                 <button onClick={()=> dispatch(IncrementQty(item))}><FaPlusCircle className='text-[green]'/></button>
               </div>
                 </div>

@@ -137,7 +137,12 @@ function Upload() {
                     {`${errors.phone && 'border-[1px] border-[red]'} bg-[#ffffff] p-2 rounded-md w-full`} type="number" />
                   {errors.phone && <span className='text-[14px] text-[red]'>{errors.phone}</span>}
                 </div>
-                <button className='bg-[#2F9EED] h-[40px] text-white rounded-lg mt-8' onClick={handleSubmit}>Checkout</button>
+                {
+                  cart.length == 0 ? 
+                  <button className='bg-[#c2c2c2] h-[40px] text-white rounded-lg mt-8' disabled>Checkout</button>
+                  :
+                  <button className='bg-[#2F9EED] h-[40px] text-white rounded-lg mt-8' onClick={handleSubmit}>Checkout</button>
+                }
               </div>
             </form>
           </div>
@@ -148,13 +153,16 @@ function Upload() {
           <div className='flex flex-col gap-5 bg-[#ededed] dark:bg-[#c9c8c8] p-3 rounded-xl'>
             <h2 className='text-[27px] font-semibold mb-2 dark:text-[black] border-b-2 border-[gray]'>Order Summary</h2>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold dark:text-[black]'>Total Items :</h2> <h2 className='dark:text-[black]'>{totalQty}</h2>
+              <h2 className='font-bold dark:text-[black]'>Total Items :</h2> <h2 className='dark:text-[black] font-bold'>{totalQty}</h2>
             </div>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold dark:text-[black]'>Sale Discount :</h2> <h2 className='text-[red]'>-${SaleDiscount}</h2>
+              <h2 className='font-bold dark:text-[black]'>Amount :</h2> <h2 className='dark:text-[black] font-bold'>{TotalPrice}</h2>
             </div>
             <div className='grid grid-cols-2'>
-              <h2 className='font-semibold dark:text-[black]'>Shipping Detail :</h2> <h2 className='text-[green]'>${ShippingRate}</h2>
+              <h2 className='font-bold dark:text-[black]'>Sale Discount :</h2> <h2 className='text-[red] font-bold'>- ${SaleDiscount}</h2>
+            </div>
+            <div className='grid grid-cols-2'>
+              <h2 className='font-bold dark:text-[black]'>Shipping Detail :</h2> <h2 className='text-[green] font-bold'>+ ${ShippingRate}</h2>
             </div>
             <h2 className='text-[23px] font-semibold dark:text-[black] border-t-2 border-[gray]'>Total Amount : $ {Math.round(Total)}</h2>
             <div>
