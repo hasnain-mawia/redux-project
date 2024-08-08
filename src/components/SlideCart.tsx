@@ -79,7 +79,7 @@ function SlideCart() {
         {cart.length > 0 &&
         <div className='w-[full] mb-3'>
         <h3 className="font-semibold text-[20px]">Items: {totalQty}</h3>
-        <h3 className="font-semibold text-[20px]">Total Amount : {TotalPrice}</h3>
+        <h3 className="font-semibold text-[20px]">Total Amount : {TotalPrice.toLocaleString()}</h3>
         </div>
         }
       { cart.length == 0 ? 

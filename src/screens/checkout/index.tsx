@@ -16,8 +16,7 @@ function Upload() {
   const ShippingRate = 25;
   const Total = cart.reduce(() => TotalPrice - SaleDiscount + ShippingRate, 0);
   const dispatch = useDispatch();
-
-
+  
   const navigate = useNavigate()
   const [errors, setErrors] = useState<any>({})
   const [values, setvalues] = useState<any>({
@@ -156,7 +155,7 @@ function Upload() {
               <h2 className='font-bold dark:text-[black]'>Total Items :</h2> <h2 className='dark:text-[black] font-bold'>{totalQty}</h2>
             </div>
             <div className='grid grid-cols-2'>
-              <h2 className='font-bold dark:text-[black]'>Amount :</h2> <h2 className='dark:text-[black] font-bold'>{TotalPrice}</h2>
+              <h2 className='font-bold dark:text-[black]'>Amount :</h2> <h2 className='dark:text-[black] font-bold'>{TotalPrice.toLocaleString()}</h2>
             </div>
             <div className='grid grid-cols-2'>
               <h2 className='font-bold dark:text-[black]'>Sale Discount :</h2> <h2 className='text-[red] font-bold'>- ${SaleDiscount}</h2>
@@ -164,7 +163,7 @@ function Upload() {
             <div className='grid grid-cols-2'>
               <h2 className='font-bold dark:text-[black]'>Shipping Detail :</h2> <h2 className='text-[green] font-bold'>+ ${ShippingRate}</h2>
             </div>
-            <h2 className='text-[23px] font-semibold dark:text-[black] border-t-2 border-[gray]'>Total Amount : $ {Math.round(Total)}</h2>
+            <h2 className='text-[23px] font-semibold dark:text-[black] border-t-2 border-[gray]'>Total Amount : $ {Total.toLocaleString()}</h2>
             <div>
             </div>
           </div>
