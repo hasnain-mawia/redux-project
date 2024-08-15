@@ -42,11 +42,11 @@ const router = createBrowserRouter([
       element: <Register/>,
     },
     {
-      path: "/upload",
+      path: "/upload",loader:CheckAuth,
       element: <Upload/>,
     },
     {
-      path: "/checkout",
+      path: "/checkout" ,loader:CheckAuth,
       element: <Checkout/>,
     },
   ]

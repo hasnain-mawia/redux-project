@@ -21,14 +21,13 @@ function Index() {
     <div>
     <div className='max-w-[1400px] mx-auto my-6 px-4'>
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-        {products.length === 0 ? <CLoader /> : 
+        {products.length === null ? `${<h2>Products Not found</h2>}` : products.length === 0 ? <CLoader /> : 
           products.map((product:any, i:number) => {
           return(
             <Link key={i} to={`/detail/${product.id}`} state={product}>
             <div className='shadow-2xl rounded-[10px] border-2 border-[#c9c9c9] flex flex-col items-center justify-center text-center'> 
-          <div className='relative flex justify-center card-hover'>
+          <div className='flex justify-center card-hover'>
           <img src={product.image} alt={product.title} className='overflow-hidden rounded-[10px]'/>
-          <button className='shop-btn bg-[#2F9EED] p-3 rounded-[30px] text-white absolute bottom-0 w-[120px] invisible'>Add to cart</button>
           </div>
           <div className='py-3 px-2 w-full'>
             <h2 className='font-bold my-1'>{product.title.slice(0,25)}</h2>
