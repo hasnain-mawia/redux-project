@@ -21,15 +21,25 @@ function Header() {
   }
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-              setUser(user);
-            } else {
-  
-            }
+        setUser(user);
           });
      }) 
-     const isAuth = localStorage.getItem('isLogin');
-      return isAuth ? (
+
+     useEffect(()=>{
+      const {pathname} = window.location;
+      if (user) {
+        if(pathname === '/'){
+          navigate('/dashboard')
+        }
+      }else{
+        if(pathname === '/upload'){
+          navigate('/')
+        }
+      }
+
+     },[window.location, user])
+
+      return user ? (
     <div className='bg-[#2F9EED] p-2 dark:bg-[gray]'>
         <div className='flex items-center justify-between max-w-[1300px] mx-auto'>
         <div>

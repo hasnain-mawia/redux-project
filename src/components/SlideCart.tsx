@@ -32,18 +32,11 @@ function SlideCart() {
             theme: "dark",
         });
   }
-  useEffect(()=>{
-    const menu = document.querySelector('#menuref')
-    document.addEventListener('mousedown',(e:any)=>{
-        if(!menu?.contains(e.target)){
-        setShowCart(false)}
-    })
-  },[])
-
+ 
   const isAuth = localStorage.getItem('isLogin'); 
   return isAuth ? (
     <>
-    { showCart ? <div className='bg-[#00000083] fixed top-0 h-screen w-full'></div> : null }
+    { showCart ? <div onClick={()=> setShowCart(false)} className='bg-[#00000083] fixed top-0 h-screen w-full'></div> : null }
     <div id='menuref' className={`${showCart ? "translate-x-0" : "translate-x-full"} w-[90%] sm:w-[50%] md:w-[40%] lg:w-[40%] xl:w-[20%] transition-all duration-300 ease-in-out h-screen bg-[white] fixed shadow-2xl top-0 right-0 z-50`}>
     <div className='w-[90%] text-[20px] p-5 flex items-center'><button className='bg-[#c6c6c6] rounded-[30px] p-2'>
     <RxCross1 onClick={()=>toggleCart()} className='text-[30px] cursor-pointer'/></button></div>

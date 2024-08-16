@@ -5,7 +5,7 @@ export default function CheckAuth() {
     if(!isLogin){
         return redirect('/')
     }else{
-        return null
+        return null;
     }
 }
 
